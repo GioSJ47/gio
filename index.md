@@ -22,7 +22,8 @@
 
 ### Jekyll Themes
 
-[Repository Open Source](https://github.com/GioSJ47/gio).
+[Repository Open Source](https://github.com/GioSJ47/gio/tree/gh-pages).
+
 [Repository Settings](https://github.com/GioSJ47/gio/settings).
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
