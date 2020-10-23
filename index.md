@@ -41,6 +41,7 @@ ___
 		vertical-align: -.075em;
 		box-sizing: border-box;
 		color: #24292e;
+		display: inline;
 	}
 	
 	.emoji {
@@ -55,9 +56,9 @@ ___
 		font-size: 16px;
 		line-height: 1.5;
 		color: #ffffff;
+		display: inline;
 	}
 </style>
 
 *Thanks [GitHub](https://github.com/ "Click to go to Git Hub")*
-<img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20" align="absmiddle">
-<g-emoji class="g-emoji" alias="two_hearts" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f495.png">💕</g-emoji>
+<img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20" align="absmiddle"><g-emoji class="g-emoji" alias="two_hearts" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f495.png">💕</g-emoji>
