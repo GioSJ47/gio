@@ -1,4 +1,6 @@
-## Welcome Anastacia!
+# Welcome!
+
+### Задача
 
 Я надеюсь, что этот веб-метод работает, и вы сможете наслаждаться моими проектами.
 
@@ -27,3 +29,8 @@
 [Repository Settings](https://github.com/GioSJ47/gio/settings).
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+___
+
+*Thanks GitHub*
+
