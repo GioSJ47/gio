@@ -32,5 +32,4 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
 
 ___
 
-*Thanks GitHub*
-
+*Thanks [GitHub](https://github.com/ "Click to go to Git Hub")*
