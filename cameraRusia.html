@@ -1,2 +1,51 @@
-<iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/moscow-city-center/?embed"></iframe>
+<script>
+  //DECLARACIONES
+  const recurso=[
+    "https://balticlivecam.com/es/cameras/russia/moscu/moscow-city-center/?embed",
+    "https://balticlivecam.com/es/cameras/russia/moscu/glory-square/?embed",
+    "https://balticlivecam.com/es/cameras/russia/moscu/moscow-panoramic-view/?embed"
+  ];
+  
+  //AJUSTE
+  const camarasL=resursos.length;
+  var camaras=new Array(resursos.length);
+  for(var i=0;i<camarasL;i++){
+    camaras[i]=false;
+  }
+  
+  //FUNCION PARA HABILITAR O DESABILITAR CAMARAS
+  function camara(id){
+    if(id>0 && id<camarasL){
+      var A='<iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="';
+      var B='"></iframe>';
+
+      if(camaras[id]){
+        document.getElementById("cam_"+id).innerHTML="";
+      } else{
+        document.getElementById("cam_"+id).innerHTML=A+recursos[id]+B;
+      }
+      camaras[id]=!camaras[id];
+    } else {
+      console.log("ERROR: Camara no existente.\nFuncion: camara("+id+");");
+  }
+    
+  //ESTRUCTURA HTML
+    var A='<div id="cam_';
+    var B='"></div>';
+    for(var i=0;i<camarasL;i++){
+      document.write(A+i+B);
+    }
+</script>
+
+<div id="cam_0">
+  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/moscow-city-center/?embed"></iframe>
+</div>
+
+<div id="cam_1">
+  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/glory-square/?embed"></iframe>
+</div>
+
+<div id="cam_2">
+  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/moscow-panoramic-view/?embed"></iframe>
+</div>
 
