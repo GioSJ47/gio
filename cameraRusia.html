@@ -30,10 +30,8 @@
   }
     
   //ESTRUCTURA HTML
-    var A='<div id="cam_';
-    var B='"></div>';
     for(var i=0;i<camarasL;i++){
-      document.write(A+i+B);
+      document.write('<a src="#" onclick="camara('+i+');">Camera '+i+</a><div id="cam_'+i+'"></div>');
     }
 </script>
 
