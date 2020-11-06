@@ -1,4 +1,6 @@
 <head>
+  <title>Cameras Rusia - Gio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     //DECLARACIONES
     var recursos=[
@@ -17,7 +19,9 @@
     //FUNCION PARA HABILITAR O DESABILITAR CAMARAS
     function camara(id){
       if(id>=0 && id<camarasL){
-        var A='<iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="';
+        var ancho=screen.width;
+        var alto=ancho/100*57;
+        var A='<iframe width="'+ancho+'" height="'+alto+'" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="';
         var B='"></iframe>';
 
         if(camaras[id]){
@@ -33,22 +37,8 @@
 
     //ESTRUCTURA HTML
       for(var i=0;i<camarasL;i++){
-        document.write('<input onclick="camara('+i+');" type="button" value="Camera '+i+'"><div id="cam_'+i+'"></div>');
+        document.write('<input onclick="camara('+i+');" type="button" value="Camera '+i+'"><div id="cam_'+i+'"></div><br>');
       }
   </script>
 </head>
-
-<!--
-<div id="cam_0">
-  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/moscow-city-center/?embed"></iframe>
-</div>
-
-<div id="cam_1">
-  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/glory-square/?embed"></iframe>
-</div>
-
-<div id="cam_2">
-  <iframe width="720" height="410" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="https://balticlivecam.com/es/cameras/russia/moscu/moscow-panoramic-view/?embed"></iframe>
-</div>
--->
 
