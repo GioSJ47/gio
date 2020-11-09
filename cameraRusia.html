@@ -19,6 +19,8 @@
     //FUNCION PARA HABILITAR O DESABILITAR CAMARAS
     function camara(id){
       if(id>=0 && id<camarasL){
+        var ancho = window.innerWidth || document.documentElement.clientWidth || docuemnt.body.cientWidth;
+        //var alto = window.innerHeight || document.documentElement.clientHeight || docuemnt.body.cientHeight;
         var ancho=screen.width;
         var alto=ancho/100*57;
         var A='<iframe width="'+ancho+'" height="'+alto+'" style="border:0" webkitallowfullscreen="true" scrolling="no" mozallowfullscreen="true" allowfullscreen="true" src="';
