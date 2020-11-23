@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+		
+		<!-- TIPICO -->
+			<!-- RANGO DE TAMAÑOS OBLIGATORIOS -- 
+			<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+			<!-- TAMAÑO INICIAL -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!---->
+			
+			<!-- CHARSET ESPAÑOL -->
+			<meta charset="UTF-8">
+			<!-- CHARSET RUSO -->
+			<meta charset="windows-1251">
+			
+		
+		
+		<!-- METADATAS FORMALES -->
+			<meta name="author" content="Gio">
+			<meta name="description" content="">
+			
+		
+		
+		<!-- RECURSOS --
+			<base href="#carpeta#" >
+			<link href="#.css" rel="stylesheet" type="text/css" media="all">
+			<script src="#.js"></script>
+		<!-- -->
+
+
+		<!-- LOGICA Y ESTILO -->
+			<?PHP
+				
+			?>
+			
+			
+			
+			<style>
+				
+			</style>
+    </head>
+
+    <body>
+		<!-- CABECERA -->
+        <header>
+			
+		</header>
+		
+		<!-- MENU DE NAVEGACION -->
+        <nav>
+			
+		</nav>
+		
+		<!-- CUERPO -->
+		<main>
+			<section>
+				<article id="articuloMusica">
+					<!--<audio src="audio.ogg" controls preload="auto">
+						<p class="errorAudio"></p>
+					</audio><!---->
+				</article>
+			</section>
+			
+			<aside>
+				
+			</aside>
+		</main>
+		
+		<!-- PIE DE PAGINA -->
+		<footer>
+			
+		</footer>
+		
+		<!-- ESPACIO PARA INCLUIR SCRIPTS -->
+		<div id="parasito">
+			
+		</div>
+		
+		<script>
+			//VARIABLES EDITABLES
+			const carpeta="musica/";
+			const lista=[
+				"Calle 13 - El Aguante",
+				"Calle 13 - Ojos Color Sol",
+				"Calle 13 - Los Idiotas",
+				"Calle 13 - Fuera de la Atmosfera del Craneo",
+				"Calle 13 - Me Vieron Cruzar",
+				"Calle 13 - La Vuelta al Mundo",
+				
+				"El Cuarteto de Nos - Contrapunto para Humano y Computadora",
+				
+				"Gnash - Lights Down Low",
+				"Gnash - Nobody's Home",
+				
+				"Sol Pereyra - Nadie Te Pregunto",
+				
+				"Twenty One Pilots - Stressed Out",
+				"Twenty One Pilots - Stressed Out Metal"
+			];
+			const formato=".mp3";
+			
+			const A = [
+				'<audio src="', '" controls preload="auto" id="audio_', '">',
+				'<p class="errorAudio">',
+				'ERROR...',
+				'</p></audio>'
+			];
+			
+			
+			//AJUSTE DE VARIABLES
+			const listaL = lista.length;
+			const objetoHTML="articuloMusica";
+			var res="";
+			
+			//CREACION DE DOCUMENTO
+			for(var i=0;i<listaL;i++){
+				res+="<h2>"+lista[i]+"</h2>";
+				res+=A[0]+carpeta+lista[i]+formato+A[1]+i+A[2]+A[3]+A[4]+A[5];
+			}
+			document.getElementById(objetoHTML).innerHTML=res;
+		</script>
+    </body>
+</html>
