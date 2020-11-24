@@ -9,6 +9,10 @@
 			margin:0;
 			padding: 0;
 		}
+		#gps{
+			top:-30px;
+		}
+		
 	</style>
 </head>
 
@@ -22,7 +26,7 @@
   var ancho = window.innerWidth || document.documentElement.clientWidth || docuemnt.body.cientWidth;
 		var alto = window.innerHeight || document.documentElement.clientHeight || docuemnt.body.cientHeight;
   document.getElementById("gps").style.width=ancho+"px";
-  document.getElementById("gps").style.height=alto+"px";
+  document.getElementById("gps").style.height=(30+alto)+"px";
  </script>
 </body>
 </html>
