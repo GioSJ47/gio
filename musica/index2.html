@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+		
+		<!-- TIPICO -->
+			<!-- RANGO DE TAMAÑOS OBLIGATORIOS -- 
+			<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+			<!-- TAMAÑO INICIAL -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!---->
+			
+			<!-- CHARSET ESPAÑOL -->
+			<meta charset="UTF-8">
+			<!-- CHARSET RUSO -->
+			<meta charset="windows-1251">
+			
+		
+		
+		<!-- METADATAS FORMALES -->
+			<meta name="author" content="Gio">
+			<meta name="description" content="">
+			
+		
+		
+		<!-- RECURSOS --
+			<base href="#carpeta#" >
+			<link href="#.css" rel="stylesheet" type="text/css" media="all">
+			<script src="#.js"></script>
+		<!-- -->
+
+
+		<!-- LOGICA Y ESTILO -->
+			<script>
+				
+			</script>
+			
+			<style>
+				
+			</style>
+    </head>
+
+    <body>
+		<!-- CABECERA -->
+        <header>
+			
+		</header>
+		
+		<!-- MENU DE NAVEGACION -->
+        <nav>
+			
+		</nav>
+		
+		<!-- CUERPO -->
+		<main>
+			<section>
+				<h2 id="titulo"></h2>
+			<section>
+			
+			<section>
+				<audio src="#" preload="none" controls id="audio">
+					<p class="errorAudio">'ERROR...'</p>
+				</audio>
+			</section>
+			
+			<section>
+				<article id="articuloMusica">
+					<!--<audio src="audio.ogg" controls preload="auto">
+						<p class="errorAudio"></p>
+					</audio><!---->
+				</article>
+				<div>
+				  <button onclick="PlayPause('PLAY')">Reproducir el Audio</button>
+				  <button onclick="PlayPause('PAUSE')">Pausar el Audio</button>
+				  <button onclick="document.getElementById('audio').volume+=0.1">Aumentar el Volumen</button>
+				  <button onclick="document.getElementById('audio').volume-=0.1">Disminuir el Volumen</button>
+				  <button onclick="Siguiente(-1)">Anterior</button>
+				  <button onclick="Siguiente(1)">Siguiente</button>
+				  <button onclick="PlayPause('OPUESTO')">---</button>
+				</div> 
+			</section>
+			
+			<aside>
+				
+			</aside>
+		</main>
+		
+		<!-- PIE DE PAGINA -->
+		<footer>
+			
+		</footer>
+		
+		<!-- ESPACIO PARA INCLUIR SCRIPTS -->
+		<div id="parasito">
+			
+		</div>
+		
+		<script>
+			//VARIABLES EDITABLES
+			const carpeta="musica/";
+			const lista=[
+				"Calle 13 - El Aguante",
+				"Calle 13 - Fuera de la Atmosfera del Craneo",
+				"Calle 13 - La Vuelta al Mundo",
+				"Calle 13 - Los Idiotas",
+				"Calle 13 - Me Vieron Cruzar",
+				"Calle 13 - Ojos Color Sol",
+				
+				"El Cuarteto de Nos - Contrapunto para Humano y Computadora",
+				"El Cuarteto de Nos - Lo Malo de ser Bueno",
+				
+				"Gnash - Lights Down Low",
+				"Gnash - Nobody's Home",
+				
+				"Slipknot - Psychosocial",
+				
+				"Sol Pereyra - Nadie Te Pregunto",
+				
+				"Twenty One Pilots - Stressed Out",
+				"Twenty One Pilots - Stressed Out Metal"
+			];
+			const formato=".mp3";
+			const n = lista.length;
+			
+			
+			
+			
+			//AJUSTE
+			const listaL = lista.length;
+			const objetoHTML="articuloMusica";
+			var res="";
+			
+			var cancion=0, volumen=0.8, tiempo=0;
+			
+			if(localStorage.getItem('cancion')==null){
+				localStorage.setItem('musica_cancion', cancion);
+				localStorage.setItem('musica_volumen', volumen);
+				localStorage.setItem('musica_tiempo', tiempo);
+			} else {
+				cancion=localStorage.getItem('musica_cancion')*1;
+				volumen=localStorage.getItem('musica_volumen')*1;
+				tiempo=localStorage.getItem('musica_tiempo')*1;
+			}
+			
+			
+			
+			document.getElementById('audio').src=carpeta+lista[cancion]+formato;
+			
+			document.getElementById('audio').volume=volumen;
+			
+			var t = audio.played.end();
+			
+			
+			
+			
+			//FUNCIONES
+				var repro=false;
+				var PLAY = "PLAY";
+				var PAUSE = "PAUSE";
+				var OPUESTO = "OPUESTO";
+				function PlayPause(inp = OPUESTO){
+					if(inp == PAUSE){
+						repro=true;
+						document.getElementById('audio').play();
+					} else if(inp = PAUSE){
+						repro=false;
+						document.getElementById('audio').pause();
+					} else if(inp == OPUESTO){
+						repro=!repro;
+						if(repro){
+							document.getElementById('audio').play();
+						} else {
+							document.getElementById('audio').pause();
+						}
+					} else {
+						console.log("Error al usar la funcion PlayPause(). Parametro ingresano no existente.");
+					}
+				}
+				
+				function Siguiente(inp = 1){
+					cancion+=inp;
+					if(cancion == n){
+						cancion = 0;
+					} else if(cancion == -1){
+						cancion = n-1;
+					}
+					document.getElementById('audio').src=carpeta+lista[cancion]+formato;
+					if(repro) document.getElementById('audio').play();
+					document.getElementById("titulo").innerHTML=lista[cancion];
+					localStorage.setItem('musica_cancion', cancion);
+					
+				}
+				
+				Siguiente(0);
+			
+			//VARIABLES NECESARIAS
+			
+			/*
+			function cancionActual(inp = "return"){
+				if(inp != 0){
+					_cancionActual+=inp;
+					while(inp > 0 && _cancionActual > listaL){
+						_cancionActual-=listaL;
+					}
+					while(inp < 0 && _cancionActual > listaL){
+						_cancionActual+=listaL;
+					}
+				} else if(inp == 0){
+					_cancionActual = 0;
+				}
+				
+				return _cancionActual;
+			}
+			*/
+			
+			//CREACION DE DOCUMENTO
+			
+			
+			
+		</script>
+    </body>
+</html>
