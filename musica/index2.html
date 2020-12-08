@@ -149,7 +149,7 @@
 			
 			document.getElementById('audio').currentTime=tiempo;
 			
-			document.getElementById('audio').muted=mute;
+			document.getElementById('audio').muted=mute*1;
 			
 			
 			
@@ -211,11 +211,12 @@
 						if(mute){
 							document.getElementById('audio').muted=0;
 							document.getElementById('mute').innerHTML="Desmute";
+							mute=0;
 						} else {
 							document.getElementById('audio').muted=1;
 							document.getElementById('mute').innerHTML="Mute";
+							mute=1;
 						}
-						mute=!mute;
 						localStorage.setItem("musica_mute", mute);
 					} else if(inp > -1 && inp < 1){
 						volumen+=inp;
