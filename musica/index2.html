@@ -57,7 +57,7 @@
 			<section>
 			
 			<section>
-				<audio src="#" preload="none" controls id="audio">
+				<audio src="#" preload controls id="audio">
 					<p class="errorAudio">'ERROR...'</p>
 				</audio>
 			</section>
@@ -69,13 +69,12 @@
 					</audio><!---->
 				</article>
 				<div>
-				  <button onclick="PlayPause('PLAY')">Reproducir el Audio</button>
-				  <button onclick="PlayPause('PAUSE')">Pausar el Audio</button>
-				  <button onclick="document.getElementById('audio').volume+=0.1">Aumentar el Volumen</button>
-				  <button onclick="document.getElementById('audio').volume-=0.1">Disminuir el Volumen</button>
-				  <button onclick="Siguiente(-1)">Anterior</button>
-				  <button onclick="Siguiente(1)">Siguiente</button>
-				  <button onclick="PlayPause('OPUESTO')">---</button>
+					<button id="play" onclick="PlayPause('OPUESTO')">Play</button><br>
+					<button onclick="Volumen(0.1)">Aumentar el Volumen</button>
+					<button onclick="Volumen(-0.1)">Disminuir el Volumen</button>
+					<button onclick="Volumen('MUTE')">Mute</button><br>
+					<button onclick="Siguiente(-1)">Anterior</button>
+					<button onclick="Siguiente(1)">Siguiente</button>
 				</div> 
 			</section>
 			
@@ -129,23 +128,28 @@
 			const objetoHTML="articuloMusica";
 			var res="";
 			
-			var cancion=0, volumen=0.8, tiempo=0;
+			var cancion=0, volumen=0.8, tiempo=0, mute=1;
 			
 			if(localStorage.getItem('cancion')==null){
 				localStorage.setItem('musica_cancion', cancion);
 				localStorage.setItem('musica_volumen', volumen);
 				localStorage.setItem('musica_tiempo', tiempo);
+				localStorage.setItem('musica_mute', mute);
 			} else {
 				cancion=localStorage.getItem('musica_cancion')*1;
 				volumen=localStorage.getItem('musica_volumen')*1;
-				tiempo=localStorage.getItem('musica_tiempo')*1;
+				tiempo=localStorage.getItem('musica_mute')*1;
 			}
 			
-			
+			document.getElementById("titulo").innerHTML=lista[cancion];
 			
 			document.getElementById('audio').src=carpeta+lista[cancion]+formato;
 			
 			document.getElementById('audio').volume=volumen;
+			
+			document.getElementById('audio').currentTime=tiempo;
+			
+			document.getElementById('audio').muted=mute;
 			
 			var t = audio.played.end();
 			
@@ -168,8 +172,10 @@
 						repro=!repro;
 						if(repro){
 							document.getElementById('audio').play();
+							document.getElementById('play').innerHTML="Pause";
 						} else {
 							document.getElementById('audio').pause();
+							document.getElementById('play').innerHTML="Play";
 						}
 					} else {
 						console.log("Error al usar la funcion PlayPause(). Parametro ingresano no existente.");
@@ -190,7 +196,26 @@
 					
 				}
 				
-				Siguiente(0);
+				
+				function Volumen(inp){
+					if(inp == "MUTE" || inp == 0){
+						if(mute){
+							document.getElementById('audio').muted=false;
+						} else {
+							document.getElementById('audio').muted=true;
+						}
+						mute=!mute;
+						localStorage.setItem("musica_mute", mute);
+					} else if(inp > -1 && inp < 1){
+						volumen+=inp;
+						if(volumen<0){
+							volumen=0;
+						} else if(volumen > 1){
+							volumen=1;
+						}
+						document.getElementById('audio').volume+=0.1
+					}
+				}
 			
 			//VARIABLES NECESARIAS
 			
