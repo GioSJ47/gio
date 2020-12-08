@@ -142,6 +142,7 @@
 			}
 			
 			document.getElementById("titulo").innerHTML=lista[cancion];
+			document.title=lista[cancion];
 			
 			document.getElementById('audio').src=carpeta+lista[cancion]+formato;
 			
@@ -197,6 +198,7 @@
 						document.getElementById('audio').play();
 					}
 					document.getElementById("titulo").innerHTML=lista[cancion];
+					document.title=lista[cancion];
 					localStorage.setItem('musica_cancion', cancion);
 					
 				}
