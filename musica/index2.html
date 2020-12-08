@@ -69,10 +69,10 @@
 					</audio><!---->
 				</article>
 				<div>
-					<button id="play" onclick="PlayPause('OPUESTO')">Play</button><br>
+					<button onclick="PlayPause('OPUESTO')" id="play">Play</button><br>
 					<button onclick="Volumen(0.1)">Aumentar el Volumen</button>
 					<button onclick="Volumen(-0.1)">Disminuir el Volumen</button>
-					<button onclick="Volumen('MUTE')">Mute</button><br>
+					<button onclick="Volumen('MUTE')" id="mute">Mute</button><br>
 					<button onclick="Siguiente(-1)">Anterior</button>
 					<button onclick="Siguiente(1)">Siguiente</button>
 				</div> 
@@ -157,6 +157,10 @@
 			
 			
 			//FUNCIONES
+			/*
+				audio.duration: Deuelve la duracion del audio
+				audio.currentTime: Posiciona el audio en donde se espesifique
+			*/
 				var repro=false;
 				var PLAY = "PLAY";
 				var PAUSE = "PAUSE";
@@ -190,10 +194,16 @@
 						cancion = n-1;
 					}
 					document.getElementById('audio').src=carpeta+lista[cancion]+formato;
-					if(repro) document.getElementById('audio').play();
+					if(repro){
+						document.getElementById('audio').play();
+					}
 					document.getElementById("titulo").innerHTML=lista[cancion];
 					localStorage.setItem('musica_cancion', cancion);
 					
+				}
+				
+				function Fin(){
+					console.log("Fin");
 				}
 				
 				
@@ -201,8 +211,10 @@
 					if(inp == "MUTE" || inp == 0){
 						if(mute){
 							document.getElementById('audio').muted=false;
+							document.getElementById('mute').innerHTML="Desmute";
 						} else {
 							document.getElementById('audio').muted=true;
+							document.getElementById('mute').innerHTML="Mute";
 						}
 						mute=!mute;
 						localStorage.setItem("musica_mute", mute);
@@ -217,30 +229,23 @@
 					}
 				}
 			
-			//VARIABLES NECESARIAS
 			
-			/*
-			function cancionActual(inp = "return"){
-				if(inp != 0){
-					_cancionActual+=inp;
-					while(inp > 0 && _cancionActual > listaL){
-						_cancionActual-=listaL;
-					}
-					while(inp < 0 && _cancionActual > listaL){
-						_cancionActual+=listaL;
-					}
-				} else if(inp == 0){
-					_cancionActual = 0;
+			
+			
+			
+		</script>
+		
+		<script>
+			//BUCLE
+			var e=0;
+			function loop(){
+				if(document.getElementById("audio").ended){
+					Siguiente(1);
 				}
-				
-				return _cancionActual;
+				e++;
 			}
-			*/
 			
-			//CREACION DE DOCUMENTO
-			
-			
-			
+			setInterval(function() { loop() }, 500);
 		</script>
     </body>
 </html>
