@@ -151,7 +151,6 @@
 			
 			document.getElementById('audio').muted=mute;
 			
-			var t = audio.played.end();
 			
 			
 			
@@ -210,10 +209,10 @@
 				function Volumen(inp){
 					if(inp == "MUTE" || inp == 0){
 						if(mute){
-							document.getElementById('audio').muted=false;
+							document.getElementById('audio').muted=0;
 							document.getElementById('mute').innerHTML="Desmute";
 						} else {
-							document.getElementById('audio').muted=true;
+							document.getElementById('audio').muted=1;
 							document.getElementById('mute').innerHTML="Mute";
 						}
 						mute=!mute;
