@@ -34,6 +34,142 @@
 				
 			</script>
 			
+			<script>
+			console.log("Script principal")
+			//VARIABLES EDITABLES
+			const carpeta="musica/";
+			const lista=[
+				"Calle 13 - El Aguante",
+				"Calle 13 - Fuera de la Atmosfera del Craneo",
+				"Calle 13 - La Vuelta al Mundo",
+				"Calle 13 - Los Idiotas",
+				"Calle 13 - Me Vieron Cruzar",
+				"Calle 13 - Ojos Color Sol",
+				
+				"El Cuarteto de Nos - Contrapunto para Humano y Computadora",
+				"El Cuarteto de Nos - Lo Malo de ser Bueno",
+				
+				"Gnash - Lights Down Low",
+				"Gnash - Nobody's Home",
+				
+				"Slipknot - Psychosocial",
+				
+				"Sol Pereyra - Nadie Te Pregunto",
+				
+				"Twenty One Pilots - Stressed Out",
+				"Twenty One Pilots - Stressed Out Metal"
+			];
+			const formato=".mp3";
+			const n = lista.length;
+			
+			
+			
+			
+			//AJUSTE
+			const objetoHTML="articuloMusica";
+			var res="";
+			
+			var cancion=0, volumen=0.8, tiempo=0, mute=0;
+			
+			if(localStorage.getItem('cancion')==null){
+				localStorage.setItem('musica_cancion', cancion);
+				localStorage.setItem('musica_volumen', volumen);
+				localStorage.setItem('musica_tiempo', tiempo);
+				localStorage.setItem('musica_mute', mute);
+			} else {
+				cancion=parseInt(localStorage.getItem('musica_cancion'));
+				volumen=parseInt(localStorage.getItem('musica_volumen'));
+				tiempo=parseInt(localStorage.getItem('musica_tiempo'));
+				mute=parseInt(localStorage.getItem('musica_mute'));
+			}
+			
+			
+			
+			
+			
+			
+			
+			//FUNCIONES
+			/*
+				audio.duration: Deuelve la duracion del audio
+				audio.currentTime: Posiciona el audio en donde se espesifique
+			*/
+				var repro=false;
+				var PLAY = "PLAY";
+				var PAUSE = "PAUSE";
+				var OPUESTO = "OPUESTO";
+				function PlayPause(inp = OPUESTO){
+					if(inp == PLAY){
+						repro=true;
+						document.getElementById('audio').play();
+					} else if(inp == PAUSE){
+						repro=false;
+						document.getElementById('audio').pause();
+					} else if(inp == OPUESTO){
+						repro=!repro;
+						if(repro){
+							document.getElementById('audio').play();
+							document.getElementById('play').innerHTML="Pause";
+						} else {
+							document.getElementById('audio').pause();
+							document.getElementById('play').innerHTML="Play";
+						}
+					} else {
+						console.log("Error al usar la funcion PlayPause(). Parametro ingresano no existente.");
+					}
+				}
+				
+				function Siguiente(inp = 1){
+					repro=document.getElementById("audio").played;
+					cancion+=inp;
+					if(cancion == n){
+						cancion = 0;
+					} else if(cancion == -1){
+						cancion = n-1;
+					}
+					document.getElementById('audio').src=carpeta+lista[cancion]+formato;
+					while(repro && !document.getElementById("audio").played){
+						document.getElementById('audio').play();
+					}
+					document.getElementById("titulo").innerHTML=lista[cancion];
+					document.title=lista[cancion];
+					localStorage.setItem('musica_cancion', cancion);
+					if(repro){
+						document.getElementById('audio').play();
+					} else {
+						document.getElementById('audio').pause();
+					}
+				}
+				
+				
+				function Volumen(inp){
+					if(inp == "MUTE" || inp == 0){
+						if(mute){
+							mute=0;
+							document.getElementById('mute').innerHTML="Mute";
+						} else {
+							mute=1;
+							document.getElementById('mute').innerHTML="Desmute";
+						}
+						document.getElementById('audio').muted=mute;
+						localStorage.setItem("musica_mute", mute);
+					} else if(inp > -1 && inp < 1){
+						volumen+=inp;
+						if(volumen<0){
+							volumen=0;
+						} else if(volumen > 1){
+							volumen=1;
+						}
+						if(document.getElementById('audio').volume<1 && document.getElementById('audio').volume>0){
+							document.getElementById('audio').volume+=0.1
+						}
+					}
+				}
+			console.log("Script principal")
+		</script>
+		
+		
+			
 			<style>
 				
 			</style>
@@ -94,51 +230,17 @@
 		</div>
 		
 		<script>
-			//VARIABLES EDITABLES
-			const carpeta="musica/";
-			const lista=[
-				"Calle 13 - El Aguante",
-				"Calle 13 - Fuera de la Atmosfera del Craneo",
-				"Calle 13 - La Vuelta al Mundo",
-				"Calle 13 - Los Idiotas",
-				"Calle 13 - Me Vieron Cruzar",
-				"Calle 13 - Ojos Color Sol",
+			console.log("Script final")
+			
+			//BUCLE
+			var e=0;
+			function loop(){
+				if(document.getElementById("audio").ended && document.getElementById("audio").played){
+					Siguiente(1);
+				}
+				//INSISTIR
 				
-				"El Cuarteto de Nos - Contrapunto para Humano y Computadora",
-				"El Cuarteto de Nos - Lo Malo de ser Bueno",
-				
-				"Gnash - Lights Down Low",
-				"Gnash - Nobody's Home",
-				
-				"Slipknot - Psychosocial",
-				
-				"Sol Pereyra - Nadie Te Pregunto",
-				
-				"Twenty One Pilots - Stressed Out",
-				"Twenty One Pilots - Stressed Out Metal"
-			];
-			const formato=".mp3";
-			const n = lista.length;
-			
-			
-			
-			
-			//AJUSTE
-			const listaL = lista.length;
-			const objetoHTML="articuloMusica";
-			var res="";
-			
-			var cancion=0, volumen=0.8, tiempo=0, mute=1;
-			
-			if(localStorage.getItem('cancion')==null){
-				localStorage.setItem('musica_cancion', cancion);
-				localStorage.setItem('musica_volumen', volumen);
-				localStorage.setItem('musica_tiempo', tiempo);
-				localStorage.setItem('musica_mute', mute);
-			} else {
-				cancion=localStorage.getItem('musica_cancion')*1;
-				volumen=localStorage.getItem('musica_volumen')*1;
-				tiempo=localStorage.getItem('musica_mute')*1;
+				e++;
 			}
 			
 			document.getElementById("titulo").innerHTML=lista[cancion];
@@ -150,104 +252,11 @@
 			
 			document.getElementById('audio').currentTime=tiempo;
 			
-			document.getElementById('audio').muted=mute*1;
-			
-			
-			
-			
-			
-			//FUNCIONES
-			/*
-				audio.duration: Deuelve la duracion del audio
-				audio.currentTime: Posiciona el audio en donde se espesifique
-			*/
-				var repro=false;
-				var PLAY = "PLAY";
-				var PAUSE = "PAUSE";
-				var OPUESTO = "OPUESTO";
-				function PlayPause(inp = OPUESTO){
-					if(inp == PAUSE){
-						repro=true;
-						document.getElementById('audio').play();
-					} else if(inp = PAUSE){
-						repro=false;
-						document.getElementById('audio').pause();
-					} else if(inp == OPUESTO){
-						repro=!repro;
-						if(repro){
-							document.getElementById('audio').play();
-							document.getElementById('play').innerHTML="Pause";
-						} else {
-							document.getElementById('audio').pause();
-							document.getElementById('play').innerHTML="Play";
-						}
-					} else {
-						console.log("Error al usar la funcion PlayPause(). Parametro ingresano no existente.");
-					}
-				}
-				
-				function Siguiente(inp = 1){
-					cancion+=inp;
-					if(cancion == n){
-						cancion = 0;
-					} else if(cancion == -1){
-						cancion = n-1;
-					}
-					document.getElementById('audio').src=carpeta+lista[cancion]+formato;
-					if(repro){
-						document.getElementById('audio').play();
-					}
-					document.getElementById("titulo").innerHTML=lista[cancion];
-					document.title=lista[cancion];
-					localStorage.setItem('musica_cancion', cancion);
-					
-				}
-				
-				function Fin(){
-					console.log("Fin");
-				}
-				
-				
-				function Volumen(inp){
-					if(inp == "MUTE" || inp == 0){
-						if(mute){
-							document.getElementById('audio').muted=0;
-							document.getElementById('mute').innerHTML="Desmute";
-							mute=0;
-						} else {
-							document.getElementById('audio').muted=1;
-							document.getElementById('mute').innerHTML="Mute";
-							mute=1;
-						}
-						localStorage.setItem("musica_mute", mute);
-					} else if(inp > -1 && inp < 1){
-						volumen+=inp;
-						if(volumen<0){
-							volumen=0;
-						} else if(volumen > 1){
-							volumen=1;
-						}
-						document.getElementById('audio').volume+=0.1
-					}
-				}
-			
-			
-			
-			
-			
-		</script>
-		
-		<script>
-			//BUCLE
-			var e=0;
-			function loop(){
-				if(document.getElementById("audio").ended){
-					Siguiente(1);
-				}
-				e++;
-			}
+			document.getElementById('audio').muted=mute*-1;
 			
 			setInterval(function() { loop() }, 500);
+			
+			console.log("Script final")
 		</script>
     </body>
 </html>
